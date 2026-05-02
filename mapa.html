@@ -65,6 +65,16 @@
 
 <body>
 
+<!-- PROTEÇÃO POR SENHA -->
+<script>
+    var senha = prompt("Digite a senha para acessar o mapa:");
+
+    if (senha !== "0402") {   // <-- TROQUE AQUI A SENHA
+        alert("Senha incorreta!");
+        window.location.href = "index.html";
+    }
+</script>
+
 <!-- MENU SUPERIOR -->
 <nav>
     <a href="index.html">Principal</a>
@@ -73,7 +83,6 @@
     <a href="fotos.html">Fotos</a>
     <a href="dados.html">Dados</a>
 </nav>
-
 
 <header>
     Mapa Interativo — Fazenda Rego
@@ -91,3 +100,4 @@
 
 </body>
 </html>
+
