@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados — Fazenda Rego</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+        }
+
+        nav {
+            background: #1b5e20;
+            padding: 10px 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        header {
+            background: #2e7d32;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h2 {
+            margin-top: 40px;
+            color: #1b5e20;
+        }
+
+        .figura {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .figura img {
+            width: 90%;
+            max-width: 900px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+
+        .atualizacao {
+            text-align: center;
+            font-size: 16px;
+            color: #444;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- PROTEÇÃO POR SENHA -->
+<script>
+window.onload = function() {
+    var senha = prompt("Digite a senha para acessar os dados:");
+
+    if (senha !== "1234") {  // <-- TROQUE AQUI A SENHA
+        alert("Senha incorreta!");
+        window.location.href = "index.html";
+    }
+};
+</script>
+
+<nav>
+    <a href="index.html">Principal</a>
+    <a href="mapa.html">Mapa</a>
+    <a href="historia.html">História</a>
+    <a href="fotos.html">Fotos</a>
+    <a href="dados.html">Dados</a>
+</nav>
+
+<header>
+    Dados da Fazenda Rego
+</header>
+
+<div class="container">
+
+    <div class="atualizacao">
+        Última atualização: <span id="dataAtualizacao">Carregando...</span>
+    </div>
+
+    <h2>Dados Gerais</h2>
+    <div class="figura"><img src="dados/dados_gerais_1.png"></div>
+    
+    <h2>Dados de Manejo</h2>
+    <div class="figura"><img src="dados/manejo_1.png"></div>
+    <div class="figura"><img src="dados/manejo_2.png"></div>
+    <div class="figura"><img src="dados/manejo_3.png"></div>
+    <div class="figura"><img src="dados/manejo_4.png"></div>
+    <div class="figura"><img src="dados/manejo_5.png"></div>
+    <div class="figura"><img src="dados/manejo_6.png"></div>
+    <div class="figura"><img src="dados/manejo_7.png"></div>
+      
+    <h2>Dados de Evolução</h2>
+    <div class="figura"><img src="dados/evolucao_1.png"></div>
+    <div class="figura"><img src="dados/evolucao_2.png"></div>
+
+</div>
+
+<footer>
+    © Fazenda Rego — Sistema de Gestão de Pastagens
+</footer>
+
+<script>
+// Obtém a data do arquivo mais recente da pasta /dados
+fetch("dados/")
+  .then(response => response.text())
+  .then(text => {
+      const parser = new DOMParser();
+      const html = parser.parseFromString(text, "text/html");
+      const links = [...html.querySelectorAll("a")];
+
+      let maisRecente = null;
+
+      links.forEach(link => {
+          if (link.href.match(/\.(png|jpg|jpeg)$/i)) {
+              const data = new Date(link.nextSibling.textContent.trim());
+              if (!maisRecente || data > maisRecente) {
+                  maisRecente = data;
+              }
+          }
+      });
+
+      if (maisRecente) {
+          document.getElementById("dataAtualizacao").textContent =
+              maisRecente.toLocaleDateString("pt-BR");
+      } else {
+          document.getElementById("dataAtualizacao").textContent =
+              "Não disponível";
+      }
+  });
+</script>
+
+</body>
+</html>
