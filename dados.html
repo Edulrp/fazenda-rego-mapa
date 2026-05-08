@@ -22,8 +22,8 @@
             left: 0;
             width: 100%;
             z-index: 1000;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
         }
-
 
         nav a {
             color: white;
@@ -36,21 +36,23 @@
             text-decoration: underline;
         }
 
-        header {
+       header {
             background: #2e7d32;
             color: white;
             padding: 20px;
             text-align: center;
             font-size: 26px;
             font-weight: bold;
+            margin-top: 70px; /* empurra o header para baixo do menu */
         }
 
-        .container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: auto;
-    margin-top: 80px;
-}
+       .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: auto;
+            margin-top: 20px; /* agora o header já empurra tudo */
+        }
+
         h2 {
             margin-top: 40px;
             color: #1b5e20;
