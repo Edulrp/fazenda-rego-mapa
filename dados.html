@@ -133,34 +133,6 @@ window.onload = function() {
 </footer>
 
 <script>
-// Obtém a data do arquivo mais recente da pasta /dados
-fetch("dados/")
-  .then(response => response.text())
-  .then(text => {
-      const parser = new DOMParser();
-      const html = parser.parseFromString(text, "text/html");
-      const links = [...html.querySelectorAll("a")];
-
-      let maisRecente = null;
-
-      links.forEach(link => {
-          if (link.href.match(/\.(png|jpg|jpeg)$/i)) {
-              const data = new Date(link.nextSibling.textContent.trim());
-              if (!maisRecente || data > maisRecente) {
-                  maisRecente = data;
-              }
-          }
-      });
-
-      if (maisRecente) {
-          document.getElementById("dataAtualizacao").textContent =
-              maisRecente.toLocaleDateString("pt-BR");
-      } else {
-          document.getElementById("dataAtualizacao").textContent =
-              "Não disponível";
-      }
-  });
-</script>
 
 </body>
 </html>
